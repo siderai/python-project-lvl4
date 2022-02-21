@@ -49,5 +49,11 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
-# Venv
-virt_env/
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
