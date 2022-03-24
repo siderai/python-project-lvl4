@@ -1,5 +1,9 @@
-<!doctype html>
-<html lang="en">
+
+
+
+
+<!DOCTYPE html>
+<html lang="ru-ru">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Менеджер задач Hexlet</title>
@@ -19,7 +23,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/users/">Пользователи</a>
           </li>
-        
+          
         </ul>
         <ul class="navbar-nav">
           
@@ -34,51 +38,32 @@
       </div>
     </nav>
     <div class="container wrapper flex-grow-1">
-    
-      <h1 class="my-4"></h1>
-
-      <!-- <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
-    
-        <title>Floating labels example for Bootstrap</title> -->
-    
-        <!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/floating-labels/"> -->
-    
-        <!-- Bootstrap core CSS -->
-        <!-- <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-    
-        <!-- Custom styles for this template -->
-        <!-- <link href="https://getbootstrap.com/docs/4.0/examples/floating-labels/floating-labels.css" rel="stylesheet">
-      </head> -->
+      
 
 
-    <form class="form-signin">
-      <div class="text-center mb-4">
-        <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Floating labels</h1>
-        <p>Build form controls with floating labels via the <code>:placeholder-shown</code> pseudo-element. <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in latest Chrome, Safari, and Firefox.</a></p>
-      </div>
+      <h1 class="my-4">
+        
+Регистрация
 
-      <div class="form-label-group">
-        <input type="email" id="inputEmail" class="form-control" placeholder="Электронная почта" required autofocus>
-        <label for="inputEmail"></label>
-      </div>
+      </h1>
+      
+<form action="/users/create/" method="post">{% csrf_token %}
+  <input type="hidden">
+  <div class="form-group"><label for="first_name">Имя</label><input id="first_name" type="text" name="first_name" maxlength="150" class="form-control" placeholder="Имя" title="" required id="first_name"></div>
+<div class="form-group"><label for="last_name">Фамилия</label><input id="last_name" type="text" name="last_name" maxlength="150" class="form-control" placeholder="Фамилия" title="" required id="last_name"></div>
+<div class="form-group"><label for="username">Имя пользователя</label><input id="username"type="text" name="username" maxlength="150" autofocus class="form-control" placeholder="Имя пользователя" title="Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_." required id="username">
+    <small class="form-text text-muted">Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_.</small>
 
-      <div class="form-label-group">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
-        <label for="inputPassword"></label>
-      </div>
+</div>
+<div class="form-group"><label for="password1">Пароль</label><input id="password1" type="password" name="password1" autocomplete="new-password" class="form-control" placeholder="Пароль" title="Ваш пароль должен содержать как минимум 3 символа." required id="password1">
+    <small class="form-text text-muted"><ul><li>Ваш пароль должен содержать как минимум 3 символа.</li></ul></small>
 
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button>
-    </form>
-  </body>
-</html>
+</div>
+<div class="form-group"><label for="password2">Подтверждение пароля</label><input id="password2" type="password" name="password2" autocomplete="new-password" class="form-control" placeholder="Подтверждение пароля" title="Для подтверждения введите, пожалуйста, пароль ещё раз." required id="password2">
+    <small class="form-text text-muted">Для подтверждения введите, пожалуйста, пароль ещё раз.</small>
+
+</div>
+  <div class="form-group">
+    <input class="btn btn-primary" type="submit" value="Зарегистрировать">
+  </div>
+</form>

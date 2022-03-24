@@ -1,7 +1,11 @@
 from django.contrib.auth import login, authenticate, get_user_model
+from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 from django.views import View
+
+from task_manager.forms import NewUserForm
 
 
 class Index(View):
@@ -11,28 +15,37 @@ class Index(View):
 
 class Users(View):
     def get(self, request):
-        # User = get_user_model()
-        # users = User.objects.all()
-        return render(request, 'users.html')
+        User = get_user_model()
+        users = User.objects.all()
+        return render(request, 'users.html', {'users': users})
 
 
 class CreateUser(View):
     def get(self, request):
-        form = UserCreationForm()
+        form = NewUserForm()
         return render(request, 'create-user.html', {'form': form})
 
     def post(self, request):
-        form = UserCreationForm(request)
-        if form.id_valid():
+        form = NewUserForm(request.POST)
+        if form.is_valid():
             form.save()
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
-            user = authenticate((username, password))
-            login(request, user)
-            return redirect('')
-        # else:
-        #     form = UserCreationForm()
-        # return render(request, 'signup.html', {'form': form})
+            
+            user = User.objects.create_user(
+                username=username,
+                first_name=first_name,
+                last_name=last_name,
+                password=password
+                )
+            # after form will work properly
+            # user = authenticate(request, username=username, password=password)
+            # login(request, user)
+            return HttpResponseRedirect('/')
+
+        # return render(request, 'create-user.html')
 
 
 
@@ -40,6 +53,35 @@ class CreateUser(View):
             # user.save()
 
 
+class UpdateUser(View):
+    def get(request):
+        pass
+        
+    def post(request):
+        pass
+
+
+
+class DeleteUser(View):
+    def get(request):
+        pass
+        
+    def post(request):
+        pass
+
+
+
+
+
+
 class Login(View):
+    def get(request):
+        pass
+
+    def post(request):
+        pass
+
+
+class Logout(View):
     pass
 
