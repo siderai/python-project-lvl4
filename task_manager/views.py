@@ -1,11 +1,11 @@
-from django.contrib.auth import login, authenticate, get_user_model
-from django.http import HttpResponseRedirect
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate, get_user_model
+from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.decorators import login_required
 from django.views import View
 
-from task_manager.forms import NewUserForm
+from task_manager.forms import NewUserForm, LoginForm, UpdateUserForm
 
 
 class Index(View):
@@ -28,7 +28,6 @@ class CreateUser(View):
     def post(self, request):
         form = NewUserForm(request.POST)
         if form.is_valid():
-            form.save()
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
             username = form.cleaned_data.get('username')
@@ -40,48 +39,71 @@ class CreateUser(View):
                 last_name=last_name,
                 password=password
                 )
-            # after form will work properly
-            # user = authenticate(request, username=username, password=password)
-            # login(request, user)
-            return HttpResponseRedirect('/')
 
-        # return render(request, 'create-user.html')
+            return redirect('/login/')
 
+        form = NewUserForm()
+        return render(request, 'create-user.html', {'form': form})
 
-
-            # user = User.objects.create_user(username, email, password)
-            # user.save()
 
 
 class UpdateUser(View):
-    def get(request):
-        pass
-        
-    def post(request):
-        pass
+    def get(self, request, pk):
+        return render(request, 'update-user.html', {'user': request.user})
 
+    def post(self, request, pk):
+        user = User.objects.get(pk=pk)
+        form = UpdateUserForm(data=request.POST, instance=user)
+        if form.is_valid():
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user.save()
+            # flash msg
+            return redirect('/users/')
 
 
 class DeleteUser(View):
-    def get(request):
-        pass
-        
-    def post(request):
-        pass
+    def get(self, request, pk):
+        return render(request, 'delete-user.html', {'user': request.user})
 
-
+    def post(self, request, pk):
+        user = User.objects.get(pk=pk)
+        if user:
+            user.delete()
+        # flash msg
+        return redirect('/users/')
 
 
 
 
 class Login(View):
-    def get(request):
-        pass
+    def get(self, request):
+        return render(request, 'login.html')
 
-    def post(request):
-        pass
+    def post(self, request):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    # flash msg
+                    return redirect('/')
+                else:
+                    # flash msg
+                    return render(request, 'login.html')
+            else:
+                # flash msg
+                return render(request, 'login.html')
+        else:
+            return render(request, 'login.html')
+
 
 
 class Logout(View):
-    pass
-
+    def post(self, request):
+        pass

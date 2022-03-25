@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="ru-ru">
   <head>
@@ -24,15 +20,23 @@
             <a class="nav-link" href="/users/">Пользователи</a>
           </li>
           
+            <li class="nav-item">
+              <a class="nav-link" href="/statuses/">Статусы</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/labels/">Метки</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tasks/">Задачи</a>
+            </li>
+          
         </ul>
         <ul class="navbar-nav">
           
-            <li class="nav-item">
-              <a class="nav-link" href="/login/">Вход</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/users/create/">Регистрация</a>
-            </li>
+            <form action="/logout/" method="post">
+              <input type="hidden" name="csrfmiddlewaretoken" value="ztWqniq13TsHeJDsd72fYjUjpDinJ7UR1QhkTHtZujEWTDSgCD5OOG2ekFbqcSk3">
+              <input class="btn nav-link" type="submit" value="Выход">
+            </form>
           
         </ul>
       </div>
@@ -43,14 +47,15 @@
 
       <h1 class="my-4">
         
-Регистрация
+Изменение пользователя
 
       </h1>
-    
-<form action="/users/create/" method="post">{% csrf_token %}
-  <div class="form-group"><label for="id_first_name">Имя</label><input type="text" name="first_name" maxlength="150" class="form-control" placeholder="Имя" title="" required id="id_first_name"></div>
-<div class="form-group"><label for="id_last_name">Фамилия</label><input type="text" name="last_name" maxlength="150" class="form-control" placeholder="Фамилия" title="" required id="id_last_name"></div>
-<div class="form-group"><label for="id_username">Имя пользователя</label><input type="text" name="username" maxlength="150" autofocus class="form-control" placeholder="Имя пользователя" title="Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_." required id="id_username">
+      
+
+<form action="/users/{{ user.pk }}/update/" method="post">{% csrf_token %}
+  <div class="form-group"><label for="id_first_name">Имя</label><input type="text" name="first_name" value="{{ user.first_name }}" maxlength="150" class="form-control" placeholder="Имя" title="" required id="id_first_name"></div>
+<div class="form-group"><label for="id_last_name">Фамилия</label><input type="text" name="last_name" value="{{ user.last_name }}" maxlength="150" class="form-control" placeholder="Фамилия" title="" required id="id_last_name"></div>
+<div class="form-group"><label for="id_username">Имя пользователя</label><input type="text" name="username" value="{{ user.username }}" maxlength="150" autofocus class="form-control" placeholder="Имя пользователя" title="Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_." required id="id_username">
     <small class="form-text text-muted">Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_.</small>
 
 </div>
@@ -63,7 +68,7 @@
 
 </div>
   <div class="form-group">
-    <input class="btn btn-primary" type="submit" value="Зарегистрировать">
+    <input class="btn btn-primary" type="submit" value="Изменить">
   </div>
 </form>
 

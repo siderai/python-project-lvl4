@@ -58,3 +58,5 @@ ENV/
 env.bak/
 venv.bak/
 /.env_
+db.sqlite3
+migrations/
