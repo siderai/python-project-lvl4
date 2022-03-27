@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.contrib.auth import login, authenticate, get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.messages.views import SuccessMessageMixin
 # from django.contrib.auth.decorators import login_required
 from django.views import View
 
@@ -39,17 +41,21 @@ class CreateUser(View):
                 last_name=last_name,
                 password=password
                 )
+            messages.success(request, 'Пользователь успешно зарегистрирован')
+            return redirect('/login')
+        else:
+            form = NewUserForm()
 
-            return redirect('/login/')
+            return render(request, 'create-user.html', {'form': form})
+        
+        
 
-        form = NewUserForm()
-        return render(request, 'create-user.html', {'form': form})
 
 
 
 class UpdateUser(View):
     def get(self, request, pk):
-        return render(request, 'update-user.html', {'user': request.user})
+        return 
 
     def post(self, request, pk):
         user = User.objects.get(pk=pk)
@@ -60,8 +66,10 @@ class UpdateUser(View):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             user.save()
-            # flash msg
+            messages.success(request, 'Пользователь успешно изменён')
             return redirect('/users/')
+        else:
+            render(request, 'update-user.html', {'user': request.user})
 
 
 class DeleteUser(View):
@@ -72,13 +80,13 @@ class DeleteUser(View):
         user = User.objects.get(pk=pk)
         if user:
             user.delete()
-        # flash msg
+            messages.success(request, 'Пользователь успешно удалён')
         return redirect('/users/')
 
 
 
 
-class Login(View):
+class Login(SuccessMessageMixin, View):
     def get(self, request):
         return render(request, 'login.html')
 
@@ -91,19 +99,15 @@ class Login(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    # flash msg
+                    messages.success(request, 'Вы залогинены')
                     return redirect('/')
-                else:
-                    # flash msg
-                    return render(request, 'login.html')
-            else:
-                # flash msg
-                return render(request, 'login.html')
-        else:
+
+            messages.error(request, 'Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут быть чувствительны к регистру.')
             return render(request, 'login.html')
 
 
 
 class Logout(View):
     def post(self, request):
+        messages.info(request, 'Вы разлогинены') # blue
         pass
