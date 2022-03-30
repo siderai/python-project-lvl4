@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import login, authenticate, get_user_model
+from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.messages.views import SuccessMessageMixin
 # from django.contrib.auth.decorators import login_required
 from django.views import View
+from requests_toolbelt import user_agent
 
 from task_manager.forms import NewUserForm, LoginForm, UpdateUserForm
 
@@ -44,27 +45,21 @@ class CreateUser(View):
             messages.success(request, 'Пользователь успешно зарегистрирован')
             return redirect('/login')
         else:
-            form = NewUserForm()
-
+            print(form.errors)
+            # form = NewUserForm()
             return render(request, 'create-user.html', {'form': form})
-        
-        
-
-
 
 
 class UpdateUser(View):
     def get(self, request, pk):
-        return 
+        return render(request, 'update-user.html')
+
 
     def post(self, request, pk):
         user = User.objects.get(pk=pk)
         form = UpdateUserForm(data=request.POST, instance=user)
         if form.is_valid():
-            first_name = form.cleaned_data.get('first_name')
-            last_name = form.cleaned_data.get('last_name')
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
+            user = form.save(commit=False)
             user.save()
             messages.success(request, 'Пользователь успешно изменён')
             return redirect('/users/')
@@ -82,7 +77,6 @@ class DeleteUser(View):
             user.delete()
             messages.success(request, 'Пользователь успешно удалён')
         return redirect('/users/')
-
 
 
 
@@ -109,5 +103,6 @@ class Login(SuccessMessageMixin, View):
 
 class Logout(View):
     def post(self, request):
+        logout(request)
         messages.info(request, 'Вы разлогинены') # blue
-        pass
+        return redirect('/')
