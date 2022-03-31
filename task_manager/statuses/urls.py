@@ -20,10 +20,8 @@ from task_manager.statuses import views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.Index.as_view()),
-    path('statuses/', views.Users.as_view()),
-    path('statuses/create/', views.CreateUser.as_view()),
-    path('/statuses/<int:pk>/update/', views.UpdateUser.as_view()),
-    path('/statuses/<int:pk>/delete/', views.Login.as_view()),
+    path('/', views.Users.as_view()),
+    path('/create/', views.CreateUser.as_view()),
+    path('/<int:pk>/update/', views.UpdateUser.as_view()),
+    path('/<int:pk>/delete/', views.Login.as_view()),
 ]
