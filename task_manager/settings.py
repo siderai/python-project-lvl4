@@ -17,9 +17,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'task_manager',
-    'task_manager.tasks',
+    # 'task_manager.tasks',
     'task_manager.statuses',
-    'task_manager.labels',
+    # 'task_manager.labels',
     # 'task_manager.users',
 ]
 
