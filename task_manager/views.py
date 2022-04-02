@@ -2,11 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate, get_user_model
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.messages.views import SuccessMessageMixin
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from requests_toolbelt import user_agent
 
 from task_manager.forms import NewUserForm, LoginForm, UpdateUserForm
 
@@ -45,44 +43,57 @@ class CreateUser(View):
             messages.success(request, 'Пользователь успешно зарегистрирован')
             return redirect('/login')
         else:
-            print(form.errors)
-            # form = NewUserForm()
+            # error
             return render(request, 'create-user.html', {'form': form})
 
 
-class UpdateUser(View):
+class UpdateUser(LoginRequiredMixin, View):
     def get(self, request, pk):
-        return render(request, 'update-user.html')
-
+        if pk == request.user.id:
+            return render(request, 'update-user.html', {'user': request.user})
+        else:
+            messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+            return redirect('/users/')
 
     def post(self, request, pk):
-        user = User.objects.get(pk=pk)
-        form = UpdateUserForm(data=request.POST, instance=user)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.save()
-            messages.success(request, 'Пользователь успешно изменён')
+        if pk == request.user.id:
+            user = User.objects.get(pk=pk)
+            form = UpdateUserForm(data=request.POST, instance=user)
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.save()
+                messages.success(request, 'Пользователь успешно изменён')
+                return redirect('/users/')
+            else:
+                render(request, 'update-user.html', {'user': request.user})
+        else:
+            messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+
+
+class DeleteUser(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        if pk == request.user.id:
+            return render(request, 'delete-user.html', {'user': request.user})
+        else:
+            messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+            return redirect('/users/')
+
+    def post(self, request, pk):
+        if pk == request.user.id:
+            user = User.objects.get(pk=pk)
+            if user:
+                user.delete()
+                messages.success(request, 'Пользователь успешно удалён')
             return redirect('/users/')
         else:
-            render(request, 'update-user.html', {'user': request.user})
-
-
-class DeleteUser(View):
-    def get(self, request, pk):
-        return render(request, 'delete-user.html', {'user': request.user})
-
-    def post(self, request, pk):
-        user = User.objects.get(pk=pk)
-        if user:
-            user.delete()
-            messages.success(request, 'Пользователь успешно удалён')
-        return redirect('/users/')
-
+            messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+            return redirect('/users/')
 
 
 class Login(SuccessMessageMixin, View):
     def get(self, request):
-        return render(request, 'login.html')
+        form = LoginForm()
+        return render(request, 'login.html', {'form': form})
 
     def post(self, request):
         form = LoginForm(request.POST)
@@ -97,8 +108,7 @@ class Login(SuccessMessageMixin, View):
                     return redirect('/')
 
             messages.error(request, 'Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут быть чувствительны к регистру.')
-            return render(request, 'login.html')
-
+            return render(request, 'login.html', {'form': form})
 
 
 class Logout(View):
