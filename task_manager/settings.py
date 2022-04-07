@@ -17,10 +17,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'task_manager',
-    # 'task_manager.tasks',
+    'task_manager.tasks',
+    'task_manager.users',
     'task_manager.statuses',
-    # 'task_manager.labels',
-    # 'task_manager.users',
+    'task_manager.labels',
 ]
 
 MIDDLEWARE = [
@@ -40,7 +40,7 @@ LOGIN_URL = '/login/'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
