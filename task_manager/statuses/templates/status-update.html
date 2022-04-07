@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="my-4">
+Изменение статуса
+</h1>
+
+<form action="/statuses/{{ status.pk }}/update/" method="post">{% csrf_token %}
+  <div class="form-group"><label for="name">Имя</label><input type="text" name="name" value="{{ status.name }}" maxlength="150" class="form-control" placeholder="Имя" title=""></div>
+  <div class="form-group">
+    <input class="btn btn-primary" type="submit" value="Изменить">
+  </div>
+</form>
+
+{% endblock content %}
