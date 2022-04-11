@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 
-from task_manager import views
+from task_manager import views, settings
 
 
 urlpatterns = [
@@ -14,3 +14,10 @@ urlpatterns = [
     path('tasks/', include('task_manager.tasks.urls')),
     path('labels/', include('task_manager.labels.urls')),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include('debug_toolbar.urls')),
+    ] + urlpatterns
+
