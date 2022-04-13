@@ -44,8 +44,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'task_manager.urls'
 
-LOGIN_URL = '/login/'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -99,17 +97,12 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 STATIC_URL = '/static/'
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
