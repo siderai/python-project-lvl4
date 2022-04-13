@@ -36,7 +36,7 @@ class CreateUser(View):
                 password=password
                 )
             messages.success(request, 'Пользователь успешно зарегистрирован')
-            return redirect('/login', username=user.username)
+            return redirect('/login/', username=user.username)
         else:
             # error
             return render(request, 'user-create.html', {'form': form})
@@ -80,6 +80,7 @@ class DeleteUser(LoginRequiredMixin, View):
         else:
             messages.error(request, 'У вас нет прав для изменения другого пользователя.')
             return redirect('/users/')
+
 
     def post(self, request, pk):
         if pk == request.user.id:

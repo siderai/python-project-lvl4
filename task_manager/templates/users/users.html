@@ -1,9 +1,5 @@
-{% extends "base.html" %}
-
-{% block content %}
-<h1 class="my-4">
-  Пользователи
-</h1>
+{% extends "base.html" %} {% block content %}
+<h1 class="my-4">Пользователи</h1>
 
 <table class="table table-striped">
   <thead>
@@ -17,19 +13,19 @@
   </thead>
   <tbody>
     <ul>
-    {% for user in users %}
-        <tr>
-            <td>{{ user.pk }}</td>
-            <td>{{ user.username }}</td>
-            <td>{{ user.first_name }} {{ user.last_name }}</td>
-            <td>{{ user.date_joined }}</td>
-            <td>
-              <a href="/users/{{ user.pk }}/update/">Изменить</a>
-              <br>
-              <a href="/users/{{ user.pk }}/delete/">Удалить</a>
-            </td>
-        </tr>
-    {% endfor %}
+      {% for user in users %}
+      <tr>
+        <td>{{ user.pk }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.first_name }} {{ user.last_name }}</td>
+        <td>{{ user.date_joined }}</td>
+        <td>
+          <a href="/users/{{ user.pk }}/update/">Изменить</a>
+          <br />
+          <a href="/users/{{ user.pk }}/delete/">Удалить</a>
+        </td>
+      </tr>
+      {% endfor %}
     </ul>
   </tbody>
 </table>

@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
-<h1 class="my-4">Изменение статуса</h1>
+<h1 class="my-4">Изменение метки</h1>
 
-<form action="/statuses/{{ status.pk }}/update/" method="post">
+<form action="/labels/{{ label.pk }}/update/" method="post">
   {% csrf_token %}
   <div class="form-group">
     <label for="name">Имя</label
