@@ -28,13 +28,13 @@ class CreateUser(View):
             last_name = form.cleaned_data.get('last_name')
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
-            
+
             user = User.objects.create_user(
                 username=username,
                 first_name=first_name,
                 last_name=last_name,
                 password=password
-                )
+            )
             messages.success(request, 'Пользователь успешно зарегистрирован')
             return redirect('/login/', username=user.username)
         else:
@@ -49,12 +49,13 @@ class UpdateUser(LoginRequiredMixin, SuccessMessageMixin, View):
         if pk == request.user.id and request.user.is_authenticated:
             return render(request, 'user-update.html', {'user': request.user})
         elif not request.user.is_authenticated:
-            messages.error(request, 'Вы не авторизованы! Пожалуйста, выполните вход.')
+            messages.error(
+                request, 'Вы не авторизованы! Пожалуйста, выполните вход.')
             return redirect('/login/')
         else:
-            messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+            messages.error(
+                request, 'У вас нет прав для изменения другого пользователя.')
             return redirect('/users/')
-
 
     def post(self, request, pk):
         if pk == request.user.id and request.user.is_authenticated:
@@ -68,7 +69,8 @@ class UpdateUser(LoginRequiredMixin, SuccessMessageMixin, View):
             else:
                 render(request, 'user-update.html', {'user': request.user})
         else:
-            messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+            messages.error(
+                request, 'У вас нет прав для изменения другого пользователя.')
 
 
 class DeleteUser(LoginRequiredMixin, View):
@@ -78,9 +80,9 @@ class DeleteUser(LoginRequiredMixin, View):
         if pk == request.user.id:
             return render(request, 'user-delete.html', {'user': request.user})
         else:
-            messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+            messages.error(
+                request, 'У вас нет прав для изменения другого пользователя.')
             return redirect('/users/')
-
 
     def post(self, request, pk):
         if pk == request.user.id:
@@ -90,5 +92,6 @@ class DeleteUser(LoginRequiredMixin, View):
                 messages.success(request, 'Пользователь успешно удалён')
             return redirect('/users/')
         else:
-            messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+            messages.error(
+                request, 'У вас нет прав для изменения другого пользователя.')
             return redirect('/users/')
