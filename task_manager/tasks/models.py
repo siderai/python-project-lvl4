@@ -18,17 +18,11 @@ class Task(models.Model):
         User,
         on_delete=models.PROTECT,
         related_name='executor',
-        blank=True,
-        default=None
+        blank=True
     )
     status = models.ForeignKey(
         Status,
         on_delete=models.PROTECT,
-        blank=True,
-        default=None
+        blank=True
     )
-    label = models.ManyToManyField(
-        Label,
-        blank=True,
-        default=None
-    )
+    labels = models.ManyToManyField(Label, blank=True)

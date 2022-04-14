@@ -8,7 +8,7 @@ from task_manager.statuses.models import Status
 
 class TaskMixin(View):
     model = Task
-    fields = ['name', 'description', 'author', 'status', 'executor', 'label']
+    fields = ['name', 'description', 'author', 'status', 'executor', 'labels']
     success_url = '/tasks/'
 
     def get_context_data(self, **kwargs):
