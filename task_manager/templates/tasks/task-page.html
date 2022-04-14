@@ -10,41 +10,43 @@
     
 <div class="card">
 <div class="card-header bg-secondary text-white">
-  <h2>1231111111</h2>
+  <h2>{{ task.name }}</h2>
 </div>
 <div class="card-body bg-light">
-  <p>123</p>
+  <p>{{ task.description }}</p>
   <hr>
   <div class="container">
     <div class="row p-1">
       <div class="col">Автор</div>
-      <div class="col">Qw123 Qw123</div>
+      <div class="col">{{ task.author.first_name }} {{ task.author.last_name }}</div>
     </div>
     <div class="row p-1">
       <div class="col">Исполнитель</div>
-      <div class="col">Ivan Petrov</div>
+      <div class="col">{{ task.executor.first_name }} {{ task.executor.last_name }}</div>
     </div>
     <div class="row p-1">
       <div class="col">Статус</div>
-      <div class="col">2</div>
+      <div class="col">{{ task.status.name }}</div>
     </div>
     <div class="row p-1">
       <div class="col">Дата создания</div>
-      <div class="col">29.03.2022 03:30</div>
+      <div class="col">{{ task.created_at }}</div>
     </div>
     <div class="row p-1">
       <div class="col">
         <h6>Метки:</h6>
         <ul>
-          
+          {% for label in task.labels.all %}
+          {{ label.name }}
+          {% endfor %}
         </ul>
       </div>
     </div>
     <div class="row p-1">
       <div class="col">
-        <a href="/tasks/1/update/">Изменить</a>
+        <a href="/tasks/{{ task.pk }}/update/">Изменить</a>
         <br>
-        <a href="/tasks/1/delete/">Удалить</a>
+        <a href="/tasks/{{ task.pk }}/delete/">Удалить</a>
       </div>
     </div>
   </div>
