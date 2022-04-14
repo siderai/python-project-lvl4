@@ -10,25 +10,25 @@ class Task(models.Model):
     description = models.CharField(max_length=150)
     created_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(
-                        User,
-                        on_delete=models.PROTECT,
-                        related_name='author'
-                        )
+        User,
+        on_delete=models.PROTECT,
+        related_name='author'
+    )
     executor = models.ForeignKey(
-                        User,
-                        on_delete=models.PROTECT,
-                        related_name='executor',
-                        blank=True,
-                        default=None
-                        )
+        User,
+        on_delete=models.PROTECT,
+        related_name='executor',
+        blank=True,
+        default=None
+    )
     status = models.ForeignKey(
-                        Status,
-                        on_delete=models.PROTECT,
-                        blank=True,
-                        default=None
-                        )
+        Status,
+        on_delete=models.PROTECT,
+        blank=True,
+        default=None
+    )
     label = models.ManyToManyField(
-                        Label,
-                        blank=True,
-                        default=None
-                        )
+        Label,
+        blank=True,
+        default=None
+    )
