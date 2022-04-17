@@ -24,13 +24,16 @@ class TaskView(View):
 
 
 class Tasks(LoginRequiredMixin, View):
-    def get(self, request, **kwargs):
+    """View that shows list of tasks. Allows filtration through GET params.
+    By default, all created tasks are shown."""
+
+    def get(self, request):
         tasks = Task.objects.select_related("executor", "status", "author").all()
         if request.GET:
             # choose only non-empty filters
             filters = {k: v for (k, v) in request.GET.items() if v}
-            # workaround to translate template params to model fields
-            # in order to hexlet.io tests run properly
+            # workaround to replace GET params with the accurate
+            # model field names, in order to pass tests
             try:
                 if filters["self_tasks"] == "on":
                     del filters["self_tasks"]
