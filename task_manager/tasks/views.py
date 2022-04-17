@@ -1,12 +1,16 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views import View
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from task_manager.tasks.utils import TaskMixin
+
 from task_manager.tasks.models import Task
+from task_manager.labels.models import Label
+from task_manager.statuses.models import Status
+from task_manager.tasks.utils import TaskMixin
 
 
 class TaskView(View):
@@ -19,10 +23,35 @@ class TaskView(View):
         return render(request, "task-page.html", {"task": task_selected})
 
 
-class Tasks(LoginRequiredMixin, FormView):
-    def get(self, request):
+class Tasks(LoginRequiredMixin, View):
+    def get(self, request, **kwargs):
         tasks = Task.objects.select_related("executor", "status", "author").all()
-        return render(request, "task-list.html", {"tasks": tasks})
+        if request.GET:
+            # choose only non-empty filters
+            filters = {k: v for (k, v) in request.GET.items() if v}
+            # workaround to translate template params to model fields
+            # in order to hexlet.io tests run properly
+            try:
+                if filters["self_tasks"] == "on":
+                    del filters["self_tasks"]
+                    filters["author"] = request.user.pk
+                if filters["label"]:
+                    filters["labels"] = filters["label"]
+                    del filters["label"]
+            except KeyError:
+                pass
+
+            tasks = tasks.filter(**filters)
+
+        labels = Label.objects.all()
+        statuses = Status.objects.all()
+        users = User.objects.all()
+
+        return render(
+            request,
+            "task-list.html",
+            {"tasks": tasks, "users": users, "statuses": statuses, "labels": labels},
+        )
 
 
 class TaskCreate(LoginRequiredMixin, SuccessMessageMixin, TaskMixin, CreateView):

@@ -4,58 +4,29 @@
 
 <a class="nav-link" href="/tasks/create/">Создать задачу</a>
 
-<!-- 
+
 <div class="card mb-3">
     <div class="card-body bg-light">
     <form class="form-inline center" method="get">
         <div class="form-group"><label for="id_status">Статус</label><div class="ml-2 mr-3"><select name="status" class="form-control" title="" id="id_status">
     <option value="" selected>---------</option>
-
-    <option value="2">2</option>
-
-    <option value="3">у</option>
-
-    <option value="4">status2</option>
-
-    <option value="8">123</option>
+    {% for status in statuses %} 
+    <option value="{{ status.pk }}">{{ status.name }}</option>
+    {% endfor %}
 
 </select></div></div>
         <div class="form-group"><label for="id_executor">Исполнитель</label><div class="mr-3 ml-2"><select name="executor" class="form-control" title="" id="id_executor">
-    <option value="" selected>---------</option>
-
-    <option value="1">Ivan Petrov</option>
-
-    <option value="2">s a</option>
-
-    <option value="3">Qw123 Qw123</option>
-
-    <option value="4">Qw1 Qw1</option>
-
-    <option value="5">Сергей Миничев</option>
-
-    <option value="7">hello hello</option>
-
-    <option value="8">JKS !!11</option>
-
-    <option value="9">Imya Familiya</option>
-
-    <option value="10">Андрей Фоминых</option>
-
-    <option value="11">Александр Чучка</option>
-
-    <option value="12">1Qw Qw</option>
-
-    <option value="13">Qw Qw</option>
+          <option value="" selected>---------</option>
+          {% for user in users %} 
+          <option value="{{ user.pk }}">{{ user.first_name }} {{ user.last_name }}</option>
+          {% endfor %}
 
 </select></div></div>
         <div class="form-group"><label for="id_label">Метка</label><div class="mr-3 ml-2"><select name="label" class="form-control" title="" id="id_label">
-    <option value="" selected>---------</option>
-
-    <option value="1">slabel1</option>
-
-    <option value="5">123123</option>
-
-    <option value="6">F</option>
+          <option value="" selected>---------</option>
+          {% for label in labels %} 
+          <option value="{{ label.pk }}">{{ label.name }}</option>
+          {% endfor %}
 
 </select></div></div>
         <div class="form-group"><div class="mr-3"><div class="form-check"><input type="checkbox" name="self_tasks" class="form-check-input" id="id_self_tasks"><label class="form-check-label" for="id_self_tasks">Только свои задачи</label></div></div></div>
@@ -64,7 +35,45 @@
         </div>
     </form>
     </div>
-</div> -->
+</div>
+
+<!-- <form method="get">
+  {{ filter.form.as_p }}
+  <input type="submit" />
+</form>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Имя</th>
+      <th>Статус</th>
+      <th>Автор</th>
+      <th>Исполнитель</th>
+      <th>Дата создания</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for task in filter %}
+    <tr>
+      <td>{{ task.pk }}</td>
+      <td>
+        <a href="/tasks/{{ task.pk }}/">{{ task.name }}</a>
+      </td>
+      <td>{{ task.status.name }}</td>
+      <td>{{ task.author.first_name }} {{ task.author.last_name }}</td>
+      <td>{{ task.executor.first_name }} {{ task.executor.last_name }}</td>
+      <td>{{ task.created_at }}</td>
+      <td>
+        <a href="/tasks/{{ task.pk }}/update/">Изменить</a>
+        <br />
+        <a href="/tasks/{{ task.pk }}/delete/">Удалить</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table> -->
 
 <table class="table table-striped">
   <thead>
