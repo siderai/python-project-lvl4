@@ -6,7 +6,6 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-
 from task_manager.tasks.models import Task
 from task_manager.labels.models import Label
 from task_manager.statuses.models import Status
@@ -14,6 +13,9 @@ from task_manager.tasks.utils import TaskMixin
 
 
 class TaskView(View):
+    """View that collects all data concerning the chosen task,
+    then render card with task info."""
+
     def get(self, request, pk):
         task_selected = (
             Task.objects.select_related("executor", "status", "author")
@@ -29,9 +31,11 @@ class Tasks(LoginRequiredMixin, View):
 
     def get(self, request):
         tasks = Task.objects.select_related("executor", "status", "author").all()
+
         if request.GET:
             # choose only non-empty filters
             filters = {k: v for (k, v) in request.GET.items() if v}
+
             # workaround to replace GET params with the accurate
             # model field names, in order to pass tests
             try:
