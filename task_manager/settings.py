@@ -4,10 +4,13 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 
-load_dotenv()
+# load_dotenv()
 
-SECRET_KEY = str(os.getenv('SECRET_KEY'))
-# DEBUG = os.getenv('DEBUG', False) == 'True'
+SECRET_KEY='django-insecure-ng$@(dmo))my_%@-4-65pi*kiixsmiz^a(v+@df!!(d(!=2+(l'
+DEBUG=True
+
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+# DEBUG = os.environ.get('DEBUG', False) == 'True'
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,7 +32,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # "debug_toolbar",
+    "debug_toolbar",
     "task_manager",
     "task_manager.tasks",
     "task_manager.users",
@@ -45,7 +48,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "task_manager.urls"
@@ -97,12 +100,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# def show_toolbar(request):
-#     return True
+def show_toolbar(request):
+    return True
 
-# DEBUG_TOOLBAR_CONFIG = {
-#     "SHOW_TOOLBAR_CALLBACK": show_toolbar,
-# }
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK": show_toolbar,
+}
+
+LOGIN_URL = '/login/'
 
 LANGUAGE_CODE = "ru-ru"
 TIME_ZONE = "UTC"
