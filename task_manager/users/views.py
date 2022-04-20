@@ -39,7 +39,6 @@ class CreateUser(View):
             messages.success(request, "Пользователь успешно зарегистрирован")
             return redirect("/login/", username=user.username)
         else:
-            # error
             return render(request, "user-create.html", {"form": form})
 
 
@@ -92,7 +91,7 @@ class DeleteUser(LoginRequiredMixin, View):
             if (
                 Task.objects.filter(author=pk).count()
                 or Task.objects.filter(executor=pk).count()
-            ):
+                ):
                 messages.error(request, "Невозможно удалить пользователя, "
                                         "потому что он используется")
             else:
