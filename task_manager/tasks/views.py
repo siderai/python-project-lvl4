@@ -13,8 +13,8 @@ from task_manager.tasks.utils import TaskMixin
 
 
 class TaskView(View):
-    """View that collects all data concerning the chosen task,
-    then render card with task info."""
+    """View that collects all data concerning the chosen task
+    and then renders a card with task info."""
 
     def get(self, request, pk):
         task_selected = (
@@ -27,7 +27,7 @@ class TaskView(View):
 
 class Tasks(LoginRequiredMixin, View):
     """View that shows list of tasks. Allows filtration through GET params.
-    By default, all created tasks are shown."""
+    All active tasks are shown by default."""
 
     def get(self, request):
         tasks = Task.objects.select_related("executor", "status", "author").all()
