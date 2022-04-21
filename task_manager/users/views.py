@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.db.models import ProtectedError
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 
 from task_manager.users.forms import NewUserForm, UpdateUserForm
-from task_manager.tasks.models import Task
+# from task_manager.tasks.models import Task
 
 
 class Users(View):
@@ -87,18 +88,29 @@ class DeleteUser(LoginRequiredMixin, View):
             return redirect("/users/")
 
     def post(self, request, pk):
+        # if pk == request.user.id:
+        #     if Task.objects.filter(author=pk) or Task.objects.filter(executor=pk):
+        #         messages.error(
+        #             request,
+        #             "Невозможно удалить пользователя, потому что он используется",
+        #         )
+        #     else:
+        #         user = User.objects.get(pk=pk)
+        #         if user:
+        #             user.delete()
+        #             messages.success(request, "Пользователь успешно удалён")
+
         if pk == request.user.id:
-            if Task.objects.filter(author=pk) or Task.objects.filter(executor=pk):
-                messages.error(
-                    request,
-                    "Невозможно удалить пользователя, потому что он используется",
-                )
-            else:
-                user = User.objects.get(pk=pk)
-                if user:
+            user = User.objects.get(pk=pk)
+            if user:
+                try:
                     user.delete()
                     messages.success(request, "Пользователь успешно удалён")
-
+                except ProtectedError:
+                    messages.error(
+                        request,
+                        "Невозможно удалить пользователя, потому что он используется",
+                    )
         else:
             messages.error(
                 request, "У вас нет прав для изменения другого пользователя."
