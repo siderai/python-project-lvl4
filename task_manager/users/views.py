@@ -88,12 +88,11 @@ class DeleteUser(LoginRequiredMixin, View):
 
     def post(self, request, pk):
         if pk == request.user.id:
-            if (
-                Task.objects.filter(author=pk).count()
-                or Task.objects.filter(executor=pk).count()
-                ):
-                messages.error(request, "Невозможно удалить пользователя, "
-                                        "потому что он используется")
+            if Task.objects.filter(author=pk) or Task.objects.filter(executor=pk):
+                messages.error(
+                    request,
+                    "Невозможно удалить пользователя, потому что он используется",
+                )
             else:
                 user = User.objects.get(pk=pk)
                 if user:
@@ -101,7 +100,8 @@ class DeleteUser(LoginRequiredMixin, View):
                     messages.success(request, "Пользователь успешно удалён")
 
         else:
-            messages.error(request, "У вас нет прав для изменения "
-                                    "другого пользователя.")
+            messages.error(
+                request, "У вас нет прав для изменения другого пользователя."
+            )
 
         return redirect("/users/")
