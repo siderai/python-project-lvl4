@@ -15,9 +15,9 @@ urlpatterns = [
     path("labels/", include("task_manager.labels.urls")),
 ]
 
-# if settings.DEBUG:
-#     import debug_toolbar # noqa
+if settings.DEBUG:
+    import debug_toolbar # noqa
 
-#     urlpatterns = [
-#         path("__debug__/", include("debug_toolbar.urls")),
-#     ] + urlpatterns
+    urlpatterns = [
+        path("__debug__/", include("debug_toolbar.urls")),
+    ] + urlpatterns

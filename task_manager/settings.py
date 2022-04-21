@@ -1,15 +1,15 @@
 import os
 
 from pathlib import Path
+import dj_database_url
 from dotenv import load_dotenv
 
 
 load_dotenv()
 
-# SECRET_KEY='django-insecure-ng$@(dmo))my_%@-4-65pi*kiixsmiz^a(v+@df!!(d(!=2+(l'
-SECRET_KEY = os.getenv('SECRET_KEY')
-DEBUG = True
-# DEBUG = os.getenv('DEBUG', False) == 'True'
+
+SECRET_KEY = os.getenv('TASK_MANAGER_SECRET_KEY')
+DEBUG = os.getenv('DEBUG_STATUS', False)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -77,10 +77,15 @@ WSGI_APPLICATION = "task_manager.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+db_from_env = dj_database_url.config(conn_max_age=0, ssl_require=False)
+if db_from_env:
+    DATABASES['default'] = db_from_env
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
