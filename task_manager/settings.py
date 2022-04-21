@@ -1,12 +1,10 @@
 import os
 
 from pathlib import Path
-import dj_database_url
 from dotenv import load_dotenv
 
 
 load_dotenv()
-
 
 SECRET_KEY = os.getenv('TASK_MANAGER_SECRET_KEY')
 DEBUG = os.getenv('DEBUG_STATUS', False)
@@ -54,13 +52,7 @@ ROOT_URLCONF = "task_manager.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            os.path.join(BASE_DIR, "task_manager/templates"),
-            os.path.join(BASE_DIR, "task_manager/templates/users"),
-            os.path.join(BASE_DIR, "task_manager/templates/tasks"),
-            os.path.join(BASE_DIR, "task_manager/templates/labels"),
-            os.path.join(BASE_DIR, "task_manager/templates/statuses"),
-        ],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -81,11 +73,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-db_from_env = dj_database_url.config(conn_max_age=0, ssl_require=False)
-if db_from_env:
-    DATABASES['default'] = db_from_env
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
