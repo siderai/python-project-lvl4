@@ -42,9 +42,12 @@ class Tasks(LoginRequiredMixin, View):
                 if filters["self_tasks"] == "on":
                     del filters["self_tasks"]
                     filters["author"] = request.user.pk
-                if filters["label"]:
-                    filters["labels"] = filters["label"]
-                    del filters["label"]
+            except KeyError:
+                pass
+
+            try:
+                filters["labels"] = filters["label"]
+                del filters["label"]
             except KeyError:
                 pass
 
