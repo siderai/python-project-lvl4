@@ -36,7 +36,7 @@
   </div>
   <div class="form-group">
     <label for="id_status">Статус</label>
-    <select name="status" class="form-control" title="" required id="id_status">
+    <select name="status" class="form-control" title="" id="id_status">
       {% if not task.status_id %}
       <option value="" selected>---------</option>
       {% else %}
@@ -62,7 +62,7 @@
       {% endif %}
 
       {% for user in users %}
-        {% if user.pk != task.executor_id %}
+        {% if user.pk != task.executor.pk %}
         <option value="{{ user.pk }}">{{ user.first_name }} {{ user.last_name }}</option>
         {% else %}
         <option value="{{ user.pk }}" selected>{{ user.first_name }} {{ user.last_name }}</option>
@@ -72,18 +72,18 @@
   </div>
   <div class="form-group">
     <label for="id_labels">Метки</label>
-    <select name="labels" class="form-control" title="" id="id_labels" multiple>
-      {% if not task.label_id %}
+    <select name="labels" class="form-control" title="" id="id_labels">
+      {% if not task.labels_id %}
       <option value="" selected>---------</option>
       {% else %}
       <option value="">---------</option>
       {% endif %}
 
       {% for label in labels %} 
-        {% if label.pk != task.label_id %}
-        <option value="{{ label.pk }}">{{ label.name }}</option>
-        {% else %}
+        {% if label.pk == task.labels.id %}
         <option value="{{ label.pk }}" selected>{{ label.name }}</option>
+        {% else %}
+        <option value="{{ label.pk }}">{{ label.name }}</option>
         {% endif %}
       {% endfor %}
     </select>
