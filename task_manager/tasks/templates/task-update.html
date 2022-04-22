@@ -72,7 +72,7 @@
   </div>
   <div class="form-group">
     <label for="id_labels">Метки</label>
-    <select name="labels" class="form-control" title="" id="id_labels">
+    <select name="labels" class="form-control" title="" id="id_labels" multiple>
       {% if not task.labels_id %}
       <option value="" selected>---------</option>
       {% else %}
