@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<h1 class="my-4">Создать задачу</h1>
-<form action="/tasks/{{ task.pk }}/update/" method="post">
+<h1 class="my-4">Изменить задачу</h1>
+<form action="{% url 'tasks_update' %}" method="post">
   {% csrf_token %}
   <div class="form-group">
     <label for="id_name">Имя</label

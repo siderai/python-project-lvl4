@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 
 <h1 class="my-4">Статусы</h1>
-<a class="nav-link" href="/labels/create/">Создать метку</a>
+<a class="nav-link" href="{% url 'labels_create' %}">Создать метку</a>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -19,9 +19,9 @@
         <td>{{ label.name }}</td>
         <td>{{ label.created_at }}</td>
         <td>
-          <a href="/labels/{{ label.pk }}/update/">Изменить</a>
+          <a href="{% url 'labels_update' %}">Изменить</a>
           <br />
-          <a href="/labels/{{ label.pk }}/delete/">Удалить</a>
+          <a href="{% url 'labels_delete' %}">Удалить</a>
         </td>
       </tr>
       {% endfor %}

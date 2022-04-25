@@ -2,7 +2,7 @@
 
 <h1 class="my-4">Задачи</h1>
 
-<a class="nav-link" href="/tasks/create/">Создать задачу</a>
+<a class="nav-link" href="{% url 'tasks_create' %}">Создать задачу</a>
 
 
 <div class="card mb-3">
@@ -37,44 +37,6 @@
     </div>
 </div>
 
-<!-- <form method="get">
-  {{ filter.form.as_p }}
-  <input type="submit" />
-</form>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Имя</th>
-      <th>Статус</th>
-      <th>Автор</th>
-      <th>Исполнитель</th>
-      <th>Дата создания</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for task in filter %}
-    <tr>
-      <td>{{ task.pk }}</td>
-      <td>
-        <a href="/tasks/{{ task.pk }}/">{{ task.name }}</a>
-      </td>
-      <td>{{ task.status.name }}</td>
-      <td>{{ task.author.first_name }} {{ task.author.last_name }}</td>
-      <td>{{ task.executor.first_name }} {{ task.executor.last_name }}</td>
-      <td>{{ task.created_at }}</td>
-      <td>
-        <a href="/tasks/{{ task.pk }}/update/">Изменить</a>
-        <br />
-        <a href="/tasks/{{ task.pk }}/delete/">Удалить</a>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table> -->
-
 <table class="table table-striped">
   <thead>
     <tr>
@@ -92,16 +54,16 @@
     <tr>
       <td>{{ task.pk }}</td>
       <td>
-        <a href="/tasks/{{ task.pk }}/">{{ task.name }}</a>
+        <a href="{% url 'task_details' %}">{{ task.name }}</a>
       </td>
       <td>{{ task.status.name }}</td>
       <td>{{ task.author.first_name }} {{ task.author.last_name }}</td>
       <td>{{ task.executor.first_name }} {{ task.executor.last_name }}</td>
       <td>{{ task.created_at }}</td>
       <td>
-        <a href="/tasks/{{ task.pk }}/update/">Изменить</a>
+        <a href="{% url 'tasks_update' %}">Изменить</a>
         <br />
-        <a href="/tasks/{{ task.pk }}/delete/">Удалить</a>
+        <a href="{% url 'tasks_delete' %}">Удалить</a>
       </td>
     </tr>
     {% endfor %}

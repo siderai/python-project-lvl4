@@ -4,7 +4,7 @@
 
 <p>Вы уверены, что хотите удалить {{ task.name }}?</p>
 
-<form action="/tasks/{{ task.pk }}/delete/" method="post">
+<form action="{% url 'tasks_delete' %}" method="post">
   {% csrf_token %}
   <input class="btn btn-danger" type="submit" value="Да, удалить" />
 </form>

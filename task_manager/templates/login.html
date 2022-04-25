@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
 <h1 class="my-4">Вход</h1>
-<form action="/login/" method="post">
+<form action="{% url 'login' %}" method="post">
   {% csrf_token %}
   <div class="form-group">
     <label for="id_username">Имя пользователя</label

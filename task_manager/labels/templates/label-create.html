@@ -2,7 +2,7 @@
 
 <h1 class="my-4">Создать метку</h1>
 
-<form action="/labels/create/" method="post">
+<form action="{% url 'labels_create' %}" method="post">
   {% csrf_token %}
   <div class="form-group">
     <label for="id_name">Имя</label

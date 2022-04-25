@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 
 <h1 class="my-4"></h1>
-<form action="/tasks/create/" method="post">
+<form action="{% url 'tasks_create' %}" method="post">
   {% csrf_token %}
   <div class="form-group">
     <label for="id_name">Имя</label
