@@ -7,9 +7,9 @@ from django.views import View
 from task_manager.forms import LoginForm
 
 
-class Index(View):
+class HomePageView(View):
     def get(self, request):
-        return render(request, "index.html")
+        return render(request, "home.html")
 
 
 class Login(SuccessMessageMixin, View):
