@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 <h1 class="my-4">Изменение статуса</h1>
 
-<form action="{% url 'statuses_update' %}" method="post">
+<form action="{% url 'status_update' %}" method="post">
   {% csrf_token %}
   <div class="form-group">
     <label for="id_name">Имя</label><input type="text" name="name" value="{{ status.name }}" maxlength="150" class="form-control" placeholder="Имя" title="" required id="id_name"/>

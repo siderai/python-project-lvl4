@@ -2,7 +2,7 @@
 
 <h1 class="my-4">Создать статус</h1>
 
-<form action="{% url 'statuses_create' %}" method="post">
+<form action="{% url 'status_create' %}" method="post">
   {% csrf_token %}
   <div class="form-group">
     <label for="id_name">Имя</label

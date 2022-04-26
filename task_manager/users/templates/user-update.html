@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 <h1 class="my-4">Изменение пользователя</h1>
 
-<form action="/users/{{ user.pk }}/update/" method="post">
+<form action="{% url 'user_update' %}" method="post">
   {% csrf_token %}
   <div class="form-group">
     <label for="id_first_name">Имя</label
