@@ -17,4 +17,6 @@ class TaskMixin(View):
         context["labels"] = Label.objects.all()
         context["statuses"] = Status.objects.all()
         context["users"] = User.objects.all()
+        context["tasks"] = Task.objects.all()
+
         return context

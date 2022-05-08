@@ -23,20 +23,16 @@ class TaskView(View):
             .prefetch_related("labels")
             .get(pk=pk)
         )
-        return render(request, "task-page.html", {"task": task_selected})
+        return render(request, "task-detail.html", {"task": task_selected})
 
 
 class Tasks(LoginRequiredMixin, View):
     """View that shows list of tasks. Allows filtration through GET params.
-    All active tasks are shown by default."""
-
-    def get(self, request):
-        tasks = Task.objects.select_related("executor", "status", "author").all()
-
+    Full list of tasks is shown by default."""
+    def _filter(self, request, tasks):
         if request.GET:
             # choose only non-empty filters
             filters = {k: v for (k, v) in request.GET.items() if v}
-
             # workaround to replace GET params with the accurate
             # model field names, in order to pass tests
             try:
@@ -51,9 +47,12 @@ class Tasks(LoginRequiredMixin, View):
                 del filters["label"]
             except KeyError:
                 pass
-
             tasks = tasks.filter(**filters)
+        return tasks
 
+    def get(self, request):
+        tasks = Task.objects.select_related("executor", "status", "author").all()
+        tasks = self._filter(request, tasks)
         labels = Label.objects.all()
         statuses = Status.objects.all()
         users = User.objects.all()
@@ -65,24 +64,32 @@ class Tasks(LoginRequiredMixin, View):
         )
 
 
-class TaskCreate(LoginRequiredMixin, SuccessMessageMixin, TaskMixin, CreateView):
+class TaskCreate(LoginRequiredMixin,
+                 SuccessMessageMixin,
+                 TaskMixin,
+                 CreateView):
     template_name = "task-create.html"
     success_message = "Задача успешно создана"
 
 
-class TaskUpdate(LoginRequiredMixin, SuccessMessageMixin, TaskMixin, UpdateView):
+class TaskUpdate(LoginRequiredMixin,
+                 SuccessMessageMixin,
+                 TaskMixin,
+                 UpdateView):
     template_name = "task-update.html"
     success_message = "Задача успешно изменена"
 
 
-class TaskDelete(LoginRequiredMixin, SuccessMessageMixin, TaskMixin, DeleteView):
+class TaskDelete(LoginRequiredMixin,
+                 SuccessMessageMixin,
+                 TaskMixin,
+                 DeleteView):
     template_name = "task-delete.html"
     success_message = "Задача успешно удалена"
 
     def get(self, request, pk):
         self.object = self.get_object()
-
-        if self.object.author == request.user.pk:
+        if self.object.author.pk == request.user.pk:
             render(request, "task-delete.html")
         else:
             messages.error(request, "Задачу может удалить только её автор")

@@ -7,7 +7,7 @@
 Просмотр задачи
 
     </h1>
-    
+
 <div class="card">
 <div class="card-header bg-secondary text-white">
   <h2>{{ task.name }}</h2>
@@ -44,9 +44,9 @@
     </div>
     <div class="row p-1">
       <div class="col">
-        <a href="{% url 'tasks_update' task.pk %}">Изменить</a>
+        <a href="{% url 'task_update' task.pk %}">Изменить</a>
         <br>
-        <a href="{% url 'tasks_delete' task.pk %}">Удалить</a>
+        <a href="{% url 'task_delete' task.pk %}">Удалить</a>
       </div>
     </div>
   </div>
