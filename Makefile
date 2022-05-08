@@ -2,7 +2,7 @@ install:
 	poetry install
 
 test:
-	poetry run pytest task_manager
+	pytest task_manager -vv
 
 test-coverage:
 	poetry run pytest --cov=task_manager --cov-report xml
