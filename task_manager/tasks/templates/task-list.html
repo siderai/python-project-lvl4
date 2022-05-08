@@ -54,16 +54,16 @@
     <tr>
       <td>{{ task.pk }}</td>
       <td>
-        <a href="{% url 'task_details' %}">{{ task.name }}</a>
+        <a href="{% url 'task_details' task.pk %}">{{ task.name }}</a>
       </td>
       <td>{{ task.status.name }}</td>
       <td>{{ task.author.first_name }} {{ task.author.last_name }}</td>
       <td>{{ task.executor.first_name }} {{ task.executor.last_name }}</td>
       <td>{{ task.created_at }}</td>
       <td>
-        <a href="{% url 'tasks_update' %}">Изменить</a>
+        <a href="{% url 'tasks_update' task.pk %}">Изменить</a>
         <br />
-        <a href="{% url 'tasks_delete' %}">Удалить</a>
+        <a href="{% url 'tasks_delete' task.pk %}">Удалить</a>
       </td>
     </tr>
     {% endfor %}

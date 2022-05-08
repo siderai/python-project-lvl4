@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # "debug_toolbar",
     "task_manager",
     "task_manager.tasks",
     "task_manager.users",
@@ -44,7 +43,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "task_manager.urls"
@@ -90,16 +88,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# def show_toolbar(request):
-#     return True
-
-# DEBUG_TOOLBAR_CONFIG = {
-#     "SHOW_TOOLBAR_CALLBACK": show_toolbar,
-# }
-
 LOGIN_URL = '/login/'
 
-LANGUAGE_CODE = "ru-ru"
+LANGUAGE_CODE = 'ru-ru'
 TIME_ZONE = "UTC"
 DATETIME_FORMAT = "d-m-Y H:i"
 USE_I18N = True

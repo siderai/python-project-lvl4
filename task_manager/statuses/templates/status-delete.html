@@ -4,7 +4,7 @@
 
 <p>Вы уверены, что хотите удалить {{ status.name }}?</p>
 
-<form action="{% url 'status_delete' %}" method="post">
+<form action="{% url 'status_delete' status.pk %}" method="post">
   {% csrf_token %}
   <input class="btn btn-danger" type="submit" value="Да, удалить" />
 </form>

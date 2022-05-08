@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse
 
 from task_manager.tasks.models import Task
 from task_manager.labels.models import Label
@@ -74,12 +75,9 @@ class TaskUpdate(LoginRequiredMixin, SuccessMessageMixin, TaskMixin, UpdateView)
     success_message = "Задача успешно изменена"
 
 
-class TaskDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
-    model = Task
-    fields = ["name"]
+class TaskDelete(LoginRequiredMixin, SuccessMessageMixin, TaskMixin, DeleteView):
     template_name = "task-delete.html"
     success_message = "Задача успешно удалена"
-    success_url = "/tasks/"
 
     def get(self, request, pk):
         self.object = self.get_object()
@@ -88,4 +86,4 @@ class TaskDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
             render(request, "task-delete.html")
         else:
             messages.error(request, "Задачу может удалить только её автор")
-            return redirect("/tasks/")
+            return redirect(reverse('tasks'))

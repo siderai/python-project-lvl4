@@ -6,7 +6,7 @@
   Вы уверены, что хотите удалить {{ user.first_name }} {{ user.last_name }}?
 </p>
 
-<form action="{% url 'user_delete' %}" method="post">
+<form action="{% url 'user_delete' user.pk %}" method="post">
   {% csrf_token %}
   <input class="btn btn-danger" type="submit" value="Да, удалить" />
 </form>
