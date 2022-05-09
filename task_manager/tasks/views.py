@@ -30,7 +30,7 @@ class Tasks(LoginRequiredMixin, View):
     Full list of tasks is shown by default."""
     def get(self, request):
         tasks = Task.objects.select_related("executor", "status", "author").all()
-        tasks = TaskFilter._filter(request, tasks)
+        tasks = TaskFilter._filter(self, request, tasks)
         labels = Label.objects.all()
         statuses = Status.objects.all()
         users = User.objects.all()
