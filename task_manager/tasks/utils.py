@@ -1,5 +1,4 @@
 from django.views import View
-from django.urls import reverse
 from django.contrib.auth.models import User
 
 from task_manager.tasks.models import Task
@@ -20,3 +19,29 @@ class TaskMixin(View):
         context["tasks"] = Task.objects.all()
 
         return context
+
+
+class TaskFilter:
+    """Filtration through GET params. Full list of tasks
+    is shown by default."""
+
+    def _filter(self, request, tasks):
+        if request.GET:
+            # choose only non-empty filters
+            filters = {k: v for (k, v) in request.GET.items() if v}
+            # workaround to replace GET params with the accurate
+            # model field names, in order to pass tests
+            try:
+                if filters["self_tasks"] == "on":
+                    del filters["self_tasks"]
+                    filters["author"] = request.user.pk
+            except KeyError:
+                pass
+
+            try:
+                filters["labels"] = filters["label"]
+                del filters["label"]
+            except KeyError:
+                pass
+            tasks = tasks.filter(**filters)
+        return tasks

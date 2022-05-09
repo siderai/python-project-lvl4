@@ -10,13 +10,12 @@ from django.urls import reverse
 from task_manager.tasks.models import Task
 from task_manager.labels.models import Label
 from task_manager.statuses.models import Status
-from task_manager.tasks.utils import TaskMixin
+from task_manager.tasks.utils import TaskMixin, TaskFilter
 
 
 class TaskView(View):
     """View that collects all data concerning the chosen task
     and then renders a card with task info."""
-
     def get(self, request, pk):
         task_selected = (
             Task.objects.select_related("executor", "status", "author")
@@ -29,30 +28,9 @@ class TaskView(View):
 class Tasks(LoginRequiredMixin, View):
     """View that shows list of tasks. Allows filtration through GET params.
     Full list of tasks is shown by default."""
-    def _filter(self, request, tasks):
-        if request.GET:
-            # choose only non-empty filters
-            filters = {k: v for (k, v) in request.GET.items() if v}
-            # workaround to replace GET params with the accurate
-            # model field names, in order to pass tests
-            try:
-                if filters["self_tasks"] == "on":
-                    del filters["self_tasks"]
-                    filters["author"] = request.user.pk
-            except KeyError:
-                pass
-
-            try:
-                filters["labels"] = filters["label"]
-                del filters["label"]
-            except KeyError:
-                pass
-            tasks = tasks.filter(**filters)
-        return tasks
-
     def get(self, request):
         tasks = Task.objects.select_related("executor", "status", "author").all()
-        tasks = self._filter(request, tasks)
+        tasks = TaskFilter._filter(request, tasks)
         labels = Label.objects.all()
         statuses = Status.objects.all()
         users = User.objects.all()
