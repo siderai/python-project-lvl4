@@ -1,9 +1,5 @@
-name: Django CI
+name: task-manager-CI
 
-on:
-  push:
-    branches: [ main ]
-  pull_r
 on:
   push:
     branches: [ main ]
