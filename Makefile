@@ -1,5 +1,6 @@
 install:
 	poetry install
+	pip install -r requirements.txt
 
 test:
 	pytest task_manager -vv
@@ -13,10 +14,8 @@ test-show:
 lint:
 	poetry run flake8 task_manager
 
-selfcheck:
+check:
 	poetry check
-
-check: selfcheck test-coverage lint
 
 build:
 	poetry build
@@ -27,6 +26,5 @@ package-install:
 deps-export:
 	poetry export -f requirements.txt --output requirements.txt
 
-
-.PHONY: install test lint selfcheck check build
+.PHONY: install test lint check build
 
