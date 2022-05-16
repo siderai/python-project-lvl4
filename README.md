@@ -9,16 +9,16 @@ You must login to access most of features
 
 ## Functionality:
 
-1. ***Tasks***: crud, filtration, cards with details
+1. ***Tasks***: crud, filtration, cards with detailed info
 2. Dynamic task management: 
       - organize your tasks into groups (***labels***) 
       - control task progress (***statuses***)
       - take responsibility or delegate (***executor***)
-3. ***Users*** registration, authorization, personal page, editing rights, admin panel
+3. ***Users***: registration, authorization, personal page, editing rights, admin panel
       - Anonimous users are read-only
       - Authorized users are able to create, update and delete basic entities. Deletion is safe: linked entities are not removable
       - Admins can edit all entities
-4. Friendly redirect messages to provide smooth UX. They report on your successful and failed actions
+4. Friendly redirect messages, reporting on completed and failed commands
 
 
 
@@ -40,7 +40,7 @@ Python3
 1. Fullstack development experience (Django + Bootstrap)
 2. Integrating Django built-ins with custom features
 3. Building hierarсhy of Django apps & templates
-4. Django ORM usage and debug
+4. Django ORM practice and debug
 5. TDD experience
 
 
