@@ -1,5 +1,7 @@
 install:
 	pip install poetry
+	pip install --upgrade poetry
+	pip install -r requirements.txt
 	poetry install
 
 test:
