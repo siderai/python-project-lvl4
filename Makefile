@@ -1,7 +1,7 @@
 install:
 	pip install poetry
 	pip install --upgrade poetry
-	poetry install
+	poetry install -v
 
 test:
 	pytest task_manager -vv
