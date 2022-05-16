@@ -30,7 +30,9 @@ jobs:
         make lint
     - name: Test with pytest
       run: |
+        pip install django
         pip install pytest
+        pip install pytest-django
         make test
     - name: Test coverage and send result to CodeClimate
       run: |
