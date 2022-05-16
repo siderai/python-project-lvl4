@@ -1,8 +1,6 @@
 install:
 	pip install poetry
 	poetry install
-	poetry export -f requirements.txt --output requirements.txt
-	pip install -r requirements.txt
 
 test:
 	pytest task_manager -vv
