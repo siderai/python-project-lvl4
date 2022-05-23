@@ -3,10 +3,14 @@
 
 # Minimalistic task tracker
 
-Deployed at Heroku: 
+Deployed on Heroku: https://siderai-tm.herokuapp.com/
 
-You must login to access most of features
+To access platform, you should create a new user or authorize as one of registered users. 
 
+Password: 
+``
+WarAndPeace
+``
 ## Functionality:
 
 1. ***Tasks***: crud, filtration, cards with detailed info
@@ -48,12 +52,7 @@ Python3
 ``` 
 git clone https://github.com/siderai/task-manager
 cd task-manager/
-python3 -m venv venv
-source venv/bin/activate
-make install
-python3 manage.py migrate
-make test
-python3 manage.py runserver
+make setup-and-runserver
 ```
 
 Training project at hexlet.io.
