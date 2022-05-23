@@ -9,7 +9,7 @@ test:
 test-coverage:
 	poetry run pytest --cov=task_manager --cov-report xml
 
-test-show:
+test-missing:
 	poetry run pytest --cov=task_manager --cov-report term-missing
 
 lint:
