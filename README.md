@@ -52,6 +52,7 @@ cd task-manager/
 python3 -m venv venv
 source venv/bin/activate
 make install
+python3 manage.py migrate
 make test
 python3 manage.py runserver
 ```
