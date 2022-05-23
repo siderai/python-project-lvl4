@@ -15,9 +15,6 @@ You must login to access most of features
       - control task progress (***statuses***)
       - take responsibility or delegate (***executor***)
 3. ***Users***: registration, authorization, personal page, editing rights, admin panel
-      - Anonimous users are read-only
-      - Authorized users are able to create, update and delete basic entities. Deletion is safe: linked entities are not removable
-      - Admins can edit all entities
 4. Friendly redirect messages, reporting on completed and failed commands
 
 
@@ -41,7 +38,6 @@ Python3
 2. Integrating Django built-ins with custom features
 3. Building hierarсhy of Django apps & templates
 4. Django ORM practice and debug
-5. TDD experience
 
 
 ## Local quickstart:
