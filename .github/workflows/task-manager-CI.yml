@@ -19,8 +19,6 @@ jobs:
         python-version: 3.8
     - name: Install dependencies
       run: |
-        pip install --upgrade pip
-        pip install poetry
         make install
     - name: Check
       run: |
@@ -30,7 +28,6 @@ jobs:
         make lint
     - name: Test with pytest
       run: |
-        make install
         make test
     - name: Test coverage and send result to CodeClimate
       run: |
