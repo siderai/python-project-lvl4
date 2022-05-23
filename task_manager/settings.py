@@ -15,7 +15,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     'localhost',
     "webserver",
-    'siderai-tm'
+    'siderai-tm.herokuapp.com'
 ]
 
 INTERNAL_IPS = [
