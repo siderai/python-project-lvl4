@@ -15,6 +15,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     'localhost',
     "webserver",
+    'ancient-retreat-20662.herokuapp.com'
 ]
 
 INTERNAL_IPS = [
