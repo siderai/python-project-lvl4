@@ -25,19 +25,22 @@ Python3
 • Django
 • Pytest
 • Poetry
+• PostgreSQL
+• Gunicorn
+• Heroku
 • Linux
 • Git
 • Github Actions (CI)
-• Heroku
 • Flake8
 • CodeClimate
-• Make
+
 
 ## Acquired skills: 
 1. Fullstack development experience (Django + Bootstrap)
 2. Integrating Django built-ins with custom features
 3. Building hierarсhy of Django apps & templates
 4. Django ORM practice and debug
+5. CI/CD (GitHub Actions + Heroku)
 
 
 ## Local quickstart:
