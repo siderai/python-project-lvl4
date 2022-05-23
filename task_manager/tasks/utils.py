@@ -31,17 +31,15 @@ class TaskFilter:
             filters = {k: v for (k, v) in request.GET.items() if v}
             # workaround to replace GET params with the accurate
             # model field names, in order to pass tests
-            try:
+
+            if "self_tasks" in filters:
                 if filters["self_tasks"] == "on":
                     del filters["self_tasks"]
                     filters["author"] = request.user.pk
-            except KeyError:
-                pass
 
-            try:
+            if "label" in filters:
                 filters["labels"] = filters["label"]
                 del filters["label"]
-            except KeyError:
-                pass
+
             tasks = tasks.filter(**filters)
         return tasks

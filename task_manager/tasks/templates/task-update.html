@@ -28,7 +28,7 @@
       class="form-control"
       placeholder="Описание"
       title=""
-      id="id_description"
+      required id="id_description"
     >{{ task.description }}</textarea>
   </div>
   <div class="form-group">
@@ -36,7 +36,7 @@
   </div>
   <div class="form-group">
     <label for="id_status">Статус</label>
-    <select name="status" class="form-control" title="" id="id_status">
+    <select name="status" class="form-control" title="" required id="id_status">
       {% if not task.status_id %}
       <option value="" selected>---------</option>
       {% else %}
@@ -54,7 +54,7 @@
   </div>
   <div class="form-group">
     <label for="id_executor">Исполнитель</label>
-    <select name="executor" class="form-control" title="" id="id_executor">
+    <select name="executor" class="form-control" title="" required id="id_executor">
       {% if not task.executor_id %}
       <option value="" selected>---------</option>
       {% else %}

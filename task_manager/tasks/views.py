@@ -16,6 +16,7 @@ from task_manager.tasks.utils import TaskMixin, TaskFilter
 class TaskView(View):
     """View that collects all data concerning the chosen task
     and then renders a card with task info."""
+
     def get(self, request, pk):
         task_selected = (
             Task.objects.select_related("executor", "status", "author")
@@ -28,6 +29,7 @@ class TaskView(View):
 class Tasks(LoginRequiredMixin, View):
     """View that shows list of tasks. Allows filtration through GET params.
     Full list of tasks is shown by default."""
+
     def get(self, request):
         tasks = Task.objects.select_related("executor", "status", "author").all()
         tasks = TaskFilter._filter(self, request, tasks)
@@ -68,7 +70,7 @@ class TaskDelete(LoginRequiredMixin,
     def get(self, request, pk):
         self.object = self.get_object()
         if self.object.author.pk == request.user.pk:
-            render(request, "task-delete.html")
+            return render(request, "task-delete.html", {'task': self.object})
         else:
             messages.error(request, "Задачу может удалить только её автор")
             return redirect(reverse('tasks'))
