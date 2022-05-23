@@ -93,7 +93,7 @@ version = "4.0.4"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 category = "main"
 optional = false
-python-versions = ">=3.8"
+python-versions = "3.8.1"
 
 [package.dependencies]
 asgiref = ">=3.4.1,<4"
@@ -320,7 +320,7 @@ python-versions = ">=2"
 
 [metadata]
 lock-version = "1.1"
-python-versions = "3.8.1"
+python-versions = "3.8.13"
 content-hash = "f07a886ee1c0d7f741bdff38ad2f63390bee9e6cd4acbe8747d95c32751e35fa"
 
 [metadata.files]
