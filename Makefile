@@ -4,13 +4,13 @@ install:
 	poetry install -v
 
 test:
-	pytest task_manager -vv
+	poetry run pytest task_manager -vv -s
 
 test-coverage:
-	pytest --cov=task_manager --cov-report xml
+	poetry run pytest --cov=task_manager --cov-report xml
 
 test-show:
-	pytest --cov=task_manager --cov-report term-missing
+	poetry run pytest --cov=task_manager --cov-report term-missing
 
 lint:
 	poetry run flake8 task_manager
