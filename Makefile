@@ -25,6 +25,14 @@ package-install:
 	make build
 	pip install --user dist/*.whl
 
+setup-and-runserver:
+	python3 -m venv venv
+	source venv/bin/activate
+	make install
+	python3 manage.py migrate
+	make test
+	python3 manage.py runserver
+
 deps-export:
 	poetry export -f requirements.txt --output requirements.txt
 
