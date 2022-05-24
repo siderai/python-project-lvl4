@@ -3,10 +3,14 @@
 
 # Minimalistic task tracker
 
-Deployed at Heroku: 
+Deployed on Heroku: https://siderai-tm.herokuapp.com/
 
-You must login to access most of features
+To access platform, you should create a new user or authorize as one of registered users. 
 
+Password: 
+``
+WarAndPeace
+``
 ## Functionality:
 
 1. ***Tasks***: crud, filtration, cards with detailed info
@@ -15,9 +19,6 @@ You must login to access most of features
       - control task progress (***statuses***)
       - take responsibility or delegate (***executor***)
 3. ***Users***: registration, authorization, personal page, editing rights, admin panel
-      - Anonimous users are read-only
-      - Authorized users are able to create, update and delete basic entities. Deletion is safe: linked entities are not removable
-      - Admins can edit all entities
 4. Friendly redirect messages, reporting on completed and failed commands
 
 
@@ -28,20 +29,22 @@ Python3
 • Django
 • Pytest
 • Poetry
+• PostgreSQL
+• Gunicorn
+• Heroku
 • Linux
 • Git
 • Github Actions (CI)
-• Heroku
 • Flake8
 • CodeClimate
-• Make
+
 
 ## Acquired skills: 
 1. Fullstack development experience (Django + Bootstrap)
 2. Integrating Django built-ins with custom features
 3. Building hierarсhy of Django apps & templates
 4. Django ORM practice and debug
-5. TDD experience
+5. CI/CD (GitHub Actions + Heroku)
 
 
 ## Local quickstart:
@@ -49,12 +52,7 @@ Python3
 ``` 
 git clone https://github.com/siderai/task-manager
 cd task-manager/
-python3 -m venv venv
-source venv/bin/activate
-make install
-python3 manage.py migrate
-make test
-python3 manage.py runserver
+make setup-and-runserver
 ```
 
 Training project at hexlet.io.
