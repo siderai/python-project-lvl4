@@ -3,23 +3,31 @@
 
 # Minimalistic task tracker
 
-Deployed on Heroku: https://siderai-tm.herokuapp.com/
+This app is designed for project teamwork.
 
-To access platform, you should create a new user or authorize as one of registered users. 
+Deployed on Heroku: https://siderai-tm.herokuapp.com/.
 
-Password: 
+To access platform, you should create a new user or authorize as one of registered users.
+
+Example login:
+``
+АндрейБ.
+``
+
+Password (same for all users): 
 ``
 WarAndPeace
 ``
 ## Functionality:
 
-1. ***Tasks***: crud, filtration, cards with detailed info
-2. Dynamic task management: 
-      - organize your tasks into groups (***labels***) 
-      - control task progress (***statuses***)
-      - take responsibility or delegate (***executor***)
-3. ***Users***: registration, authorization, personal page, editing rights, admin panel
-4. Friendly redirect messages, reporting on completed and failed commands
+1. Dynamic **task** management:
+      - add, update and delete tasks
+      - organize your tasks into groups (**labels**) 
+      - control task progress (**statuses**)
+      - take responsibility or delegate (**executor**)
+      - search for related tasks (filtration)
+2. **Users**: registration, authorization, personal page, editing rights
+3. Friendly redirect messages, reporting on completed and failed user commands
 
 
 
@@ -28,10 +36,11 @@ WarAndPeace
 Python3
 • Django
 • Pytest
-• Poetry
 • PostgreSQL
 • Gunicorn
 • Heroku
+• Bootstrap
+• HTML
 • Linux
 • Git
 • Github Actions (CI)
@@ -39,11 +48,13 @@ Python3
 • CodeClimate
 
 
+
+
 ## Acquired skills: 
 1. Fullstack development experience (Django + Bootstrap)
 2. Integrating Django built-ins with custom features
-3. Building hierarсhy of Django apps & templates
-4. Django ORM practice and debug
+3. Django ORM practice and debug
+4. Building hierarсhy of Django apps & templates
 5. CI/CD (GitHub Actions + Heroku)
 
 
