@@ -26,8 +26,8 @@ WarAndPeace
       - control task progress (**statuses**)
       - take responsibility or delegate (**executor**)
       - search for related tasks (filtration)
-2. **Users**: registration, authorization, personal page, editing rights
-3. Friendly redirect messages, reporting on completed and failed user commands
+2. **Users**: registration, authorization, personal page, editing rights.
+3. Friendly redirect messages, reporting on completed and failed user commands.
 
 
 
