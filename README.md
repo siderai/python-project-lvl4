@@ -3,7 +3,7 @@
 
 # Minimalistic task tracker
 
-This app is designed for project teamwork.
+Useful tool for both personal and team projects
 
 Deployed on Heroku: https://siderai-tm.herokuapp.com/.
 
@@ -18,6 +18,8 @@ Password (same for all users):
 ``
 WarAndPeace
 ``
+
+
 ## Functionality:
 
 1. Dynamic **task** management:
