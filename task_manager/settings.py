@@ -7,17 +7,12 @@ import dj_database_url
 
 load_dotenv()
 
-SECRET_KEY = os.getenv('TASK_MANAGER_SECRET_KEY')
-DEBUG = os.getenv('DEBUG_STATUS', False)
+SECRET_KEY = os.getenv("TASK_MANAGER_SECRET_KEY")
+DEBUG = os.getenv("DEBUG_STATUS", False)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    'localhost',
-    "webserver",
-    'siderai-tm.herokuapp.com'
-]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "webserver", "siderai-tm.herokuapp.com"]
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -30,11 +25,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # 3rd party
+    "rest_framework",
+    # local
     "task_manager",
     "task_manager.tasks",
     "task_manager.users",
     "task_manager.statuses",
     "task_manager.labels",
+    "task_manager.api",
 ]
 
 MIDDLEWARE = [
@@ -46,6 +45,12 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ]
+}
 
 ROOT_URLCONF = "task_manager.urls"
 
@@ -68,21 +73,21 @@ TEMPLATES = [
 WSGI_APPLICATION = "task_manager.wsgi.application"
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
 
 db_from_env = dj_database_url.config(conn_max_age=0, ssl_require=False)
 if db_from_env:
-    DATABASES['default'] = db_from_env
+    DATABASES["default"] = db_from_env
 
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator", # noqa
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
@@ -96,9 +101,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LOGIN_URL = '/login/'
+LOGIN_URL = "/login/"
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = "ru-ru"
 TIME_ZONE = "UTC"
 DATETIME_FORMAT = "d-m-Y H:i"
 USE_I18N = True
