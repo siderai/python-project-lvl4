@@ -3,21 +3,26 @@
 
 # Minimalistic task tracker
 
-Useful tool for both personal and team projects
+Useful tool for both personal and team projects. Implemented with Django + Bootstrap, but also provides Django REST API for frontend. 
 
-Deployed on Heroku: https://siderai-tm.herokuapp.com/.
+Take a look at working app: 
 
-To access platform, you should create a new user or authorize as one of registered users.
+1. Deployed on [Heroku](https://siderai-tm.herokuapp.com/). 
+2. Check out API [documentation](https://siderai-tm.herokuapp.com/swagger/)
 
-Example login:
+To access platform, you must create a user or authorize as one of registered users.
+
+## Quickstart credentials:
+
+login: 
 ``
 АндрейБ.
 ``
-
-Password (same for all users): 
+password (same for all users): 
 ``
 WarAndPeace
 ``
+
 
 
 ## Functionality:
@@ -37,6 +42,7 @@ WarAndPeace
 
 Python3
 • Django
+• DRF
 • Pytest
 • PostgreSQL
 • Gunicorn
@@ -50,13 +56,11 @@ Python3
 • CodeClimate
 
 
-
-
 ## Acquired skills: 
-1. Fullstack development experience (Django + Bootstrap)
-2. Integrating Django built-ins with custom features
+1. Fullstack development (Django + Bootstrap)
+2. Building API with Django REST Framework
 3. Django ORM practice and debug
-4. Building hierarсhy of Django apps & templates
+4. Integrating Django built-ins with custom features
 5. CI/CD (GitHub Actions + Heroku)
 
 
@@ -65,7 +69,12 @@ Python3
 ``` 
 git clone https://github.com/siderai/task-manager
 cd task-manager/
-make setup-and-runserver
+python3 -m venv venv
+source venv/bin/activate
+make install
+python3 manage.py migrate
+make test
+python3 manage.py runserver
 ```
 
 Training project at hexlet.io.
