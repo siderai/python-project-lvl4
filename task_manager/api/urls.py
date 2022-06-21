@@ -11,4 +11,6 @@ urlpatterns = [
     path("labels/<int:pk>/", views.LabelDetail.as_view()),
     path("statuses/", views.StatusList.as_view()),
     path("statuses/<int:pk>/", views.StatusDetail.as_view()),
+    path("tasks/", views.TaskList.as_view()),
+    path("tasks/<int:pk>/", views.TaskDetail.as_view()),
 ]

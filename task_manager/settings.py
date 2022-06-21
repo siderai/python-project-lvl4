@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # 3rd party
     "rest_framework",
+    "drf_yasg",
     # local
     "task_manager",
     "task_manager.tasks",
