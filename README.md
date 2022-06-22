@@ -5,10 +5,10 @@
 
 Useful tool for both personal and team projects. Implemented with Django + Bootstrap, but also provides Django REST API for frontend. 
 
-Take a look at working app: 
+Take a look: 
 
-1. Deployed on [Heroku](https://siderai-tm.herokuapp.com/). 
-2. Check out API [documentation](https://siderai-tm.herokuapp.com/swagger/)
+1. Fullstack app is deployed on [Heroku](https://siderai-tm.herokuapp.com/); 
+2. For using as API check out [documentation](https://siderai-tm.herokuapp.com/swagger/).
 
 To access platform, you must create a user or authorize as one of registered users.
 
