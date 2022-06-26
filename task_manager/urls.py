@@ -20,6 +20,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    # templates
     path("admin/", admin.site.urls),
     path("", views.HomePageView.as_view(), name="home"),
     path("login/", views.Login.as_view(), name="login"),
@@ -28,8 +29,12 @@ urlpatterns = [
     path("statuses/", include("task_manager.statuses.urls")),
     path("tasks/", include("task_manager.tasks.urls")),
     path("labels/", include("task_manager.labels.urls")),
+    # api
     path("api/v1/", include("task_manager.api.urls")),
     path("api-auth", include("rest_framework.urls")),
+    path("api/v1/rest-auth", include("rest_auth.urls")),
+    path("api/v1/rest-auth/registration", include("rest_auth.registration.urls")),
+    # api docs
     re_path(
         r"^swagger(?P<format>\.json|\.yaml)$",
         schema_view.without_ui(cache_timeout=0),
