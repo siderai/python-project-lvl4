@@ -14,6 +14,12 @@ from .serializers import (
 )
 
 
+class UserList(generics.ListAPIView):
+    permission_classes = (AllowAny,)
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsCurrentUser or IsAdminUser,)
     queryset = User.objects.all()

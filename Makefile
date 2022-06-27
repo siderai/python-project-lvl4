@@ -1,5 +1,4 @@
 install:
-	pip install poetry
 	pip install --upgrade poetry
 	poetry install -v
 
